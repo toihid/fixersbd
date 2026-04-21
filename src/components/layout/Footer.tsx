@@ -1,6 +1,10 @@
+"use client";
 import Link from "next/link";
+import { useLangStore } from "@/store/lang-store";
 
 export function Footer() {
+  const { t } = useLangStore();
+
   return (
     <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -15,41 +19,36 @@ export function Footer() {
               </span>
             </div>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Your trusted local worker marketplace in Bangladesh. Find verified
-              skilled workers near you.
+              {t("footer.description")}
             </p>
           </div>
-
           <div>
-            <h4 className="font-semibold text-sm mb-3">For Customers</h4>
+            <h4 className="font-semibold text-sm mb-3">{t("footer.forCustomers")}</h4>
             <ul className="space-y-2 text-sm text-gray-500 dark:text-gray-400">
-              <li><Link href="/search" className="hover:text-brand-500">Find Workers</Link></li>
-              <li><Link href="/categories" className="hover:text-brand-500">Categories</Link></li>
-              <li><Link href="/how-it-works" className="hover:text-brand-500">How It Works</Link></li>
+              <li><Link href="/search" className="hover:text-brand-500">{t("footer.findWorkers")}</Link></li>
+              <li><Link href="/categories" className="hover:text-brand-500">{t("nav.categories")}</Link></li>
+              <li><Link href="/how-it-works" className="hover:text-brand-500">{t("footer.howItWorks")}</Link></li>
             </ul>
           </div>
-
           <div>
-            <h4 className="font-semibold text-sm mb-3">For Workers</h4>
+            <h4 className="font-semibold text-sm mb-3">{t("footer.forWorkers")}</h4>
             <ul className="space-y-2 text-sm text-gray-500 dark:text-gray-400">
-              <li><Link href="/register?role=worker" className="hover:text-brand-500">Join as Worker</Link></li>
-              <li><Link href="/verification" className="hover:text-brand-500">Get Verified</Link></li>
+              <li><Link href="/register?role=worker" className="hover:text-brand-500">{t("footer.joinAsWorker")}</Link></li>
+              <li><Link href="/verification" className="hover:text-brand-500">{t("footer.getVerified")}</Link></li>
             </ul>
           </div>
-
           <div>
-            <h4 className="font-semibold text-sm mb-3">Company</h4>
+            <h4 className="font-semibold text-sm mb-3">{t("footer.company")}</h4>
             <ul className="space-y-2 text-sm text-gray-500 dark:text-gray-400">
-              <li><Link href="/about" className="hover:text-brand-500">About Us</Link></li>
-              <li><Link href="/contact" className="hover:text-brand-500">Contact</Link></li>
-              <li><Link href="/privacy" className="hover:text-brand-500">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-brand-500">Terms of Service</Link></li>
+              <li><Link href="/about" className="hover:text-brand-500">{t("footer.aboutUs")}</Link></li>
+              <li><Link href="/contact" className="hover:text-brand-500">{t("footer.contact")}</Link></li>
+              <li><Link href="/privacy" className="hover:text-brand-500">{t("footer.privacy")}</Link></li>
+              <li><Link href="/terms" className="hover:text-brand-500">{t("footer.terms")}</Link></li>
             </ul>
           </div>
         </div>
-
         <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800 text-center text-sm text-gray-500">
-          <p>&copy; {new Date().getFullYear()} FixersBD. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} FixersBD. {t("footer.rights")}</p>
         </div>
       </div>
     </footer>

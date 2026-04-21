@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { SearchBar } from "@/components/search/SearchBar";
+import { useLangStore } from "@/store/lang-store";
 import {
   Zap,
   Droplets,
@@ -37,29 +38,15 @@ const categories = [
 ];
 
 const features = [
-  {
-    icon: Shield,
-    title: "Verified Workers",
-    description: "Every worker goes through our verification process. NID, phone, and photo verified.",
-  },
-  {
-    icon: MapPin,
-    title: "Find Nearby",
-    description: "Auto-detect your location and find skilled workers closest to you.",
-  },
-  {
-    icon: Star,
-    title: "Trusted Reviews",
-    description: "Real reviews from real customers. Only verified job completions count.",
-  },
-  {
-    icon: CheckCircle,
-    title: "Easy Hiring",
-    description: "Contact directly, negotiate, finalize deal, and mark complete. Simple.",
-  },
+  { icon: Shield, titleKey: "features.verifiedWorkers", descKey: "features.verifiedDesc" },
+  { icon: MapPin, titleKey: "features.findNearby", descKey: "features.findNearbyDesc" },
+  { icon: Star, titleKey: "features.trustedReviews", descKey: "features.trustedReviewsDesc" },
+  { icon: CheckCircle, titleKey: "features.easyHiring", descKey: "features.easyHiringDesc" },
 ];
 
 export default function HomePage() {
+  const { t, locale } = useLangStore();
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -72,14 +59,13 @@ export default function HomePage() {
             className="text-center max-w-3xl mx-auto"
           >
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
-              Find Trusted{" "}
-              <span className="text-brand-500">Local Workers</span>
+              {t("hero.title1")}{" "}
+              <span className="text-brand-500">{t("hero.title2")}</span>
               <br />
-              Near You 222
+              {t("hero.title3")}
             </h1>
             <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
-              Bangladesh&apos;s trusted marketplace for skilled workers.
-              Electricians, plumbers, mechanics and more — verified and ready.
+              {t("hero.subtitle")}
             </p>
 
             {/* Search Bar */}
@@ -114,10 +100,10 @@ export default function HomePage() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-2">
-            Browse by Category
+            {t("categories.browseBy")}
           </h2>
           <p className="text-gray-500 text-center mb-8">
-            Find the right professional for any job
+            {t("categories.findRight")}
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
@@ -139,8 +125,8 @@ export default function HomePage() {
                     <cat.icon size={24} />
                   </div>
                   <div className="text-center">
-                    <p className="text-sm font-medium">{cat.name}</p>
-                    <p className="text-xs text-gray-400">{cat.nameBn}</p>
+                    <p className="text-sm font-medium">{locale === "bn" ? cat.nameBn : cat.name}</p>
+                    <p className="text-xs text-gray-400">{locale === "bn" ? cat.name : cat.nameBn}</p>
                   </div>
                 </Link>
               </motion.div>
@@ -153,16 +139,16 @@ export default function HomePage() {
       <section className="bg-gray-50 dark:bg-gray-900/50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-2">
-            Why FixersBD?
+            {t("features.whyFixersBD")}
           </h2>
           <p className="text-gray-500 text-center mb-10">
-            Built for trust, speed, and simplicity
+            {t("features.subtitle")}
           </p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, i) => (
               <motion.div
-                key={feature.title}
+                key={feature.titleKey}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -172,9 +158,9 @@ export default function HomePage() {
                 <div className="w-10 h-10 bg-brand-100 dark:bg-brand-900/30 rounded-lg flex items-center justify-center mb-4">
                   <feature.icon size={20} className="text-brand-500" />
                 </div>
-                <h3 className="font-semibold mb-1">{feature.title}</h3>
+                <h3 className="font-semibold mb-1">{t(feature.titleKey)}</h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {feature.description}
+                  {t(feature.descKey)}
                 </p>
               </motion.div>
             ))}
@@ -186,17 +172,16 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="bg-brand-500 rounded-2xl p-8 sm:p-12 text-center text-white">
           <h2 className="text-2xl sm:text-3xl font-bold mb-3">
-            Are you a skilled worker?
+            {t("cta.areYouWorker")}
           </h2>
           <p className="text-brand-100 mb-6 max-w-lg mx-auto">
-            Join FixersBD and get discovered by thousands of customers looking
-            for your skills. Get verified and start earning.
+            {t("cta.joinDesc")}
           </p>
           <Link
             href="/register?role=worker"
             className="inline-block bg-white text-brand-600 font-semibold px-6 py-3 rounded-xl hover:bg-brand-50 transition-colors"
           >
-            Join as a Worker
+            {t("cta.joinAsWorker")}
           </Link>
         </div>
       </section>

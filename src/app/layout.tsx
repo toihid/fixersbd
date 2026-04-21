@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/components/providers/AuthProvider";
+import { LangProvider } from "@/components/providers/LangProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
@@ -44,10 +45,12 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AuthProvider>
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <Toaster position="top-right" richColors />
+            <LangProvider>
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <Toaster position="top-right" richColors />
+            </LangProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>
