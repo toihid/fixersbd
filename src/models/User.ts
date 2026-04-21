@@ -85,6 +85,13 @@ UserSchema.index({ role: 1, isActive: 1 });
 UserSchema.index({ "location.coordinates.lat": 1, "location.coordinates.lng": 1 });
 UserSchema.index({ skills: 1 });
 UserSchema.index({ categoryId: 1, availability: 1 });
-UserSchema.index({ name: "text", occupation: "text", skills: "text", bio: "text" });
 
-export default mongoose.models.User || mongoose.model<IUserDoc>("User", UserSchema);
+// Text index — only add if not already defined
+try {
+  UserSchema.index({ name: "text", occupation: "text", skills: "text", bio: "text" });
+} catch (e) {
+  // Index already exists
+}
+
+const User = mongoose.models.User || mongoose.model<IUserDoc>("User", UserSchema);
+export default User;
