@@ -3,6 +3,8 @@ import { connectDB } from "@/lib/db";
 import { getAuthUser } from "@/lib/auth";
 import User from "@/models/User";
 
+export const dynamic = "force-dynamic";
+
 export async function PATCH(
   req: NextRequest,
   { params }: { params: { id: string } }

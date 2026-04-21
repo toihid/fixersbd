@@ -4,6 +4,8 @@ import { getAuthUser } from "@/lib/auth";
 import { complaintSchema } from "@/lib/validations";
 import Complaint from "@/models/Complaint";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: NextRequest) {
   try {
     const auth = await getAuthUser();

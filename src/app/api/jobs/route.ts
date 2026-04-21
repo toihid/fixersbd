@@ -6,6 +6,8 @@ import Job from "@/models/Job";
 import User from "@/models/User";
 import Notification from "@/models/Notification";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: NextRequest) {
   try {
     const auth = await getAuthUser();

@@ -5,6 +5,8 @@ import Job from "@/models/Job";
 import User from "@/models/User";
 import Notification from "@/models/Notification";
 
+export const dynamic = "force-dynamic";
+
 const validTransitions: Record<string, string[]> = {
   pending: ["deal_final", "cancelled"],
   deal_final: ["in_progress", "cancelled"],

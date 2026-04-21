@@ -4,6 +4,8 @@ import { getAuthUser } from "@/lib/auth";
 import { categorySchema } from "@/lib/validations";
 import Category from "@/models/Category";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     await connectDB();

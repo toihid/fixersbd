@@ -6,6 +6,8 @@ import Job from "@/models/Job";
 import Complaint from "@/models/Complaint";
 import Category from "@/models/Category";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const auth = await getAuthUser();

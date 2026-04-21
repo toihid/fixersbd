@@ -3,6 +3,8 @@ import { connectDB } from "@/lib/db";
 import User from "@/models/User";
 import Review from "@/models/Review";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
