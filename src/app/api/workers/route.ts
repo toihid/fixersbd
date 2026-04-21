@@ -33,12 +33,21 @@ export async function GET(req: NextRequest) {
       });
       if (cat) {
         filter.categoryId = cat._id;
+      } else {
+        // Fallback: search by occupation if category not found in DB
+        filter.occupation = { $regex: new RegExp(detectedCategory, "i") };
       }
     }
 
-    // Text search
+    // Text search — only if no category filter applied
     if (query && !detectedCategory) {
-      filter.$text = { $search: query };
+      // Use regex search instead of $text to avoid index requirement
+      filter.$or = [
+        { name: { $regex: new RegExp(query, "i") } },
+        { occupation: { $regex: new RegExp(query, "i") } },
+        { skills: { $regex: new RegExp(query, "i") } },
+        { bio: { $regex: new RegExp(query, "i") } },
+      ];
     }
 
     if (verified) {
@@ -107,7 +116,7 @@ export async function GET(req: NextRequest) {
   } catch (error: any) {
     console.error("Workers search error:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Internal server error", detail: error?.message },
       { status: 500 }
     );
   }
